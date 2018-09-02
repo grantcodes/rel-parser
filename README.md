@@ -6,6 +6,22 @@ You can provide just a url or optionally add a html string or headers object to 
 
 ## Usage
 
+Running the rel scraper function returns a promise which will resolve with an object containing keys and arrays of values of found rels.
+
+The returned object will look something like this:
+
+```
+{
+  me: [
+    'https://twitter.com/grantcodes',
+    'https://facebook.com/grantcodes
+  ],
+  micropub: ['https://grant.codes/micropub]
+}
+```
+
+All keys will be lowercase and all urls will be absolute.
+
 ### Basic url
 
 ```
