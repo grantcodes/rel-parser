@@ -1,0 +1,16 @@
+{
+  "name": "rel-scraper",
+  "version": "1.0.0",
+  "description": "A simple function to scrape rel links from a url or html document",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "https://grant.codes",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "jsdom": "^11.12.0",
+    "li": "^1.3.0"
+  }
+}
