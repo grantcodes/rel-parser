@@ -14,9 +14,9 @@ The returned object will look something like this:
 {
   me: [
     'https://twitter.com/grantcodes',
-    'https://facebook.com/grantcodes
+    'https://facebook.com/grantcodes'
   ],
-  micropub: ['https://grant.codes/micropub]
+  micropub: ['https://grant.codes/micropub']
 }
 ```
 
