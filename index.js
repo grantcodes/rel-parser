@@ -15,7 +15,11 @@ const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
     let rels = {};
     let baseUrl = providedUrl;
     let doc = null;
-    const isNode = typeof module !== "undefined" && module.exports;
+    const isNode =
+      typeof module !== "undefined" &&
+      module.exports &&
+      process &&
+      !process.browser;
 
     // Load node dependencies
     if (isNode) {
