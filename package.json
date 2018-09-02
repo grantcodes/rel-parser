@@ -3,10 +3,23 @@
   "version": "1.0.0",
   "description": "A simple function to scrape rel links from a url or html document",
   "main": "index.js",
+  "homepage": "https://github.com/grantcodes/rel-scraper",
+  "bugs": {
+    "url": "https://github.com/grantcodes/rel-scraper",
+    "email": "mail@grant.codes"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grantcodes/rel-scraper.git"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "https://grant.codes",
+  "author": {
+    "url": "https://grant.codes",
+    "name": "Grant Richmond",
+    "email": "mail@grant.codes"
+  },
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
