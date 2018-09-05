@@ -34,7 +34,14 @@ const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
       providedHtml || providedHeaders
         ? Promise.resolve({ html: providedHtml, headers: providedHeaders })
         : new Promise((resolveHtml, rejectHtml) => {
-            axios({ url: baseUrl, method: "get", responseType: "text" })
+            axios({
+              url: baseUrl,
+              method: "get",
+              responseType: "text",
+              headers: {
+                accept: "text/html,application/xhtml+xml"
+              }
+            })
               .then(res => {
                 if (
                   res.request &&
