@@ -1,6 +1,6 @@
 {
-  "name": "rel-scraper",
-  "version": "1.0.0",
+  "name": "rel-parser",
+  "version": "1.0.1",
   "description": "A simple function to scrape rel links from a url or html document",
   "main": "index.js",
   "homepage": "https://github.com/grantcodes/rel-scraper",
