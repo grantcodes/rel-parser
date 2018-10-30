@@ -1,6 +1,6 @@
 {
   "name": "rel-parser",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A simple function to scrape rel links from a url or html document",
   "main": "index.js",
   "homepage": "https://github.com/grantcodes/rel-scraper",
@@ -25,5 +25,8 @@
     "axios": "^0.18.0",
     "jsdom": "^11.12.0",
     "li": "^1.3.0"
+  },
+  "browser": {
+    "jsdom/lib/jsdom/living": false
   }
 }
