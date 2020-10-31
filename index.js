@@ -11,6 +11,9 @@ const axios = require("axios");
  */
 const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
   new Promise((resolve, reject) => {
+    if (!providedUrl) {
+      return reject("Must provide URL as first parameter");
+    }
     // Assign some variables
     let rels = {};
     let baseUrl = providedUrl;
@@ -23,7 +26,8 @@ const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
 
     // Load node dependencies
     if (isNode) {
-      const { DOMParser } = require("jsdom/lib/jsdom/living");
+      const { JSDOM } = require("jsdom");
+      const DOMParser = new JSDOM().window.DOMParser;
       const { URL } = require("url");
       global.DOMParser = DOMParser;
       global.URL = URL;
@@ -39,10 +43,10 @@ const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
               method: "get",
               responseType: "text",
               headers: {
-                accept: "text/html,application/xhtml+xml"
-              }
+                accept: "text/html,application/xhtml+xml",
+              },
             })
-              .then(res => {
+              .then((res) => {
                 if (
                   res.request &&
                   res.request.res &&
@@ -53,8 +57,7 @@ const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
                 }
                 resolveHtml({ html: res.data, headers: res.headers });
               })
-              .catch(err => {
-                console.log("Error fetching url", err);
+              .catch((err) => {
                 rejectHtml(err);
               });
           });
@@ -70,22 +73,22 @@ const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
           const relEls = doc.querySelectorAll("[rel][href]");
 
           // Take a base element into account
-          if (baseEl) {
-            const value = baseEl.getAttribute("href");
+          if (baseEl && doc.baseURI) {
+            const value = doc.baseURI;
             const urlObj = new URL(value, baseUrl);
             baseUrl = urlObj.toString();
           }
 
           if (relEls.length) {
-            relEls.forEach(relEl => {
+            relEls.forEach((relEl) => {
               const names = relEl
                 .getAttribute("rel")
                 .toLowerCase()
                 .split(/(\s+)/)
-                .filter(key => key.trim());
+                .filter((key) => key.trim());
               const value = relEl.getAttribute("href");
               if (names.length && value !== null) {
-                names.forEach(name => {
+                names.forEach((name) => {
                   if (!rels[name]) {
                     rels[name] = [];
                   }
@@ -109,7 +112,9 @@ const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
                 value = [value];
               }
               // Make possible relative urls absolute based on the url requested
-              value = value.map(link => new URL(link, providedUrl).toString());
+              value = value.map((link) =>
+                new URL(link, providedUrl).toString()
+              );
               rels[key] = value;
             }
           }
@@ -117,7 +122,7 @@ const relScraper = (providedUrl, providedHtml = null, providedHeaders = null) =>
 
         resolve(rels);
       })
-      .catch(err => {
+      .catch((err) => {
         reject(err);
       });
   });
