@@ -25,7 +25,7 @@ All keys will be lowercase and all urls will be absolute.
 ### Basic url
 
 ```
-relScraper('https://grant.codes')
+relParser('https://grant.codes')
   .then(rels => {
     console.log('grant.codes rels', rels)
   })
@@ -35,7 +35,7 @@ relScraper('https://grant.codes')
 ### With html string
 
 ```
-relScraper('https://grant.codes', '<a href="https://www.twitter.com/grantcodes/" rel="me">Twitter</a>')
+relParser('https://grant.codes', '<a href="https://www.twitter.com/grantcodes/" rel="me">Twitter</a>')
   .then(rels => {
     console.log('Me', rels.me)
   })
@@ -49,7 +49,7 @@ const headers = {
   link: '<https://grant.codes/micropub>; rel="micropub"'
 };
 
-relScraper('https://grant.codes', null, headers)
+relParser('https://grant.codes', null, headers)
   .then(rels => {
     console.log('Micropub', rels.micropub)
   })
