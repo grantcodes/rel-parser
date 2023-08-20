@@ -10,7 +10,7 @@ Running the rel scraper function returns a promise which will resolve with an ob
 
 The returned object will look something like this:
 
-```
+```js
 {
   me: [
     'https://twitter.com/grantcodes',
@@ -24,7 +24,7 @@ All keys will be lowercase and all urls will be absolute.
 
 ### Basic url
 
-```
+```js
 relParser('https://grant.codes')
   .then(rels => {
     console.log('grant.codes rels', rels)
@@ -34,7 +34,7 @@ relParser('https://grant.codes')
 
 ### With html string
 
-```
+```js
 relParser('https://grant.codes', '<a href="https://www.twitter.com/grantcodes/" rel="me">Twitter</a>')
   .then(rels => {
     console.log('Me', rels.me)
@@ -44,7 +44,7 @@ relParser('https://grant.codes', '<a href="https://www.twitter.com/grantcodes/" 
 
 ### With http link header parsing
 
-```
+```js
 const headers = {
   link: '<https://grant.codes/micropub>; rel="micropub"'
 };
