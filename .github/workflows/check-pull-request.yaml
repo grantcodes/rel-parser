@@ -1,0 +1,32 @@
+name: Check Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        name: Checkout code
+
+      - uses: actions/setup-node@v3
+        name: Setup node
+        with:
+          node-version: 18
+          registry-url: 'https://registry.npmjs.org'
+
+      - run: npm ci
+        name: Install dependencies
+
+      - run: npm build
+        name: Build
+
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: npm run test
+        name: Run tests
