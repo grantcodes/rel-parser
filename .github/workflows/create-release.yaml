@@ -30,6 +30,10 @@ jobs:
         name: Install dependencies
         if: ${{ steps.release.outputs.release_created }}
 
+      - run: npm build
+        name: Build
+        if: ${{ steps.release.outputs.release_created }}
+
       - run: npm test
         name: Run tests
         if: ${{ steps.release.outputs.release_created }}
