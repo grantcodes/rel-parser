@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/grantcodes/rel-parser/compare/v2.0.0...v2.0.1) (2023-08-20)
+
+
+### Reverts
+
+* remove accidental example file ([0e19901](https://github.com/grantcodes/rel-parser/commit/0e19901746904b5f7f49fa3c71eadf2ff9d36b37))
+
 ## [2.0.0](https://github.com/grantcodes/rel-parser/compare/v1.1.0...v2.0.0) (2023-08-20)
 
 

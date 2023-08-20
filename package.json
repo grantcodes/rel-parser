@@ -1,6 +1,6 @@
 {
   "name": "rel-parser",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A simple function to scrape rel links from a url or html document",
   "type": "module",
   "main": "dist/main.cjs",
