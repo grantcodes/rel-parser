@@ -43,8 +43,7 @@
     "email": "mail@grant.codes"
   },
   "dependencies": {
-    "htmlparser2": "^9.0.0",
-    "li": "^1.3.0"
+    "htmlparser2": "^9.0.0"
   },
   "devDependencies": {
     "@ava/typescript": "^4.1.0",

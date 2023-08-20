@@ -1,23 +1,39 @@
-// @ts-expect-error No types for li.
-import li from 'li'
-import type { relParserResponse } from '../types'
+import type { relParserProvidedHeadersStrings, relParserResponse } from '../types'
 
-const getRelsFromHeaders = (headers: any, baseUrl: string): relParserResponse => {
-  const rels: relParserResponse = {}
-  if ((headers?.link as boolean || headers?.Link as boolean)) {
-    const passedHeaders: string = headers.link ?? headers.Link ?? ''
-    const links = li.parse(passedHeaders)
-    for (const key in links) {
-      let value = links[key]
-      if (!Array.isArray(value)) {
-        value = [value]
-      }
+const parseLinkHeaderString = (linkHeaderString: string, baseUrl: string): relParserResponse => {
+  const res: relParserResponse = {}
+
+  const parts = linkHeaderString.split(',')
+
+  const regex = /<(.*)>; rel="(.*)"/
+
+  for (const part of parts) {
+    const match = part.match(regex)
+    if (match !== null && match.length === 3) {
       // Make possible relative urls absolute based on the url requested
-      value = value.map((link: string) => new URL(link, baseUrl).toString())
-      rels[key] = value
+      const url = new URL(match[1], baseUrl).toString()
+      const rel = match[2]
+
+      if (typeof res[rel] === 'undefined') {
+        res[rel] = []
+      }
+
+      res[rel].push(url)
     }
   }
-  return rels
+
+  return res
 }
 
-export { getRelsFromHeaders }
+const getRelsFromHeaders = (headers: relParserProvidedHeadersStrings, baseUrl: string): relParserResponse => {
+  const headerKeys = Object.keys(headers)
+
+  if (headerKeys.includes('link') || headerKeys.includes('Link')) {
+    const passedHeaders: string = headers.link ?? headers.Link ?? ''
+    return parseLinkHeaderString(passedHeaders, baseUrl)
+  }
+
+  return {}
+}
+
+export { parseLinkHeaderString, getRelsFromHeaders }

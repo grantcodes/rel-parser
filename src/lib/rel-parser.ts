@@ -1,11 +1,7 @@
 import { getData } from './get-data'
 import { getRelsFromHtml } from './get-rels-from-html'
 import { getRelsFromHeaders } from './get-rels-from-headers'
-import type { relParserResponse } from '../types'
-
-interface relParserProvidedHeadersOption {
-  [key: string]: string
-}
+import type { relParserProvidedHeadersStrings, relParserResponse } from '../types'
 
 /**
  * Fetches the given url and gets rel links from the html and headers.
@@ -19,7 +15,7 @@ interface relParserProvidedHeadersOption {
 const relParser = async (
   providedUrl: string,
   providedHtml?: string,
-  providedHeaders?: relParserProvidedHeadersOption
+  providedHeaders?: relParserProvidedHeadersStrings
 ): Promise<relParserResponse> => {
   if (providedUrl === '') {
     throw new TypeError('Must provide URL as first parameter')
@@ -45,7 +41,9 @@ const relParser = async (
   }
 
   // Parse the headers
-  rels = { ...rels, ...getRelsFromHeaders(headers, providedUrl) }
+  if (typeof headers !== 'undefined') {
+    rels = { ...rels, ...getRelsFromHeaders(headers, providedUrl) }
+  }
 
   return rels
 }

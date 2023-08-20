@@ -4,5 +4,15 @@ import { baseElHtml } from './base-el-html'
 import { basicHtml } from './basic-html'
 import { brokenHtml } from './broken-html'
 import { defaultRels } from './default-rels'
+import { headersString, headersObject } from './headers'
 
-export { absoluteBaseElRels, absoluteDefaultRels, baseElHtml, basicHtml, brokenHtml, defaultRels }
+export {
+  absoluteBaseElRels,
+  absoluteDefaultRels,
+  baseElHtml,
+  basicHtml,
+  brokenHtml,
+  defaultRels,
+  headersString,
+  headersObject
+}

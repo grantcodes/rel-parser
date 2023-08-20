@@ -1,7 +1,7 @@
 import test from 'ava'
 import { mock } from 'node:test'
-import { relParser } from '../main'
-import { absoluteBaseElRels, absoluteDefaultRels, baseElHtml, basicHtml, brokenHtml } from './data'
+import { relParser } from '../../lib/rel-parser'
+import { absoluteBaseElRels, absoluteDefaultRels, baseElHtml, basicHtml, brokenHtml, headersObject, headersString } from '../data'
 
 test('requires input', async (t) => {
   await t.throwsAsync(async () => await relParser(''), {
@@ -23,6 +23,11 @@ test('html with base element', async (t) => {
 test('works with broken html', async (t) => {
   const res = await relParser('https://example.com', brokenHtml)
   t.deepEqual(res, absoluteDefaultRels)
+})
+
+test('headers no html', async (t) => {
+  const res = await relParser('https://example.com', '', { link: headersString })
+  t.deepEqual(res, headersObject)
 })
 
 test('html request basic', async (t) => {
