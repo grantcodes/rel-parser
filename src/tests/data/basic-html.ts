@@ -1,13 +1,15 @@
 import { defaultRels } from './default-rels'
 
+const links = Object.entries(defaultRels)
+  .map(
+    ([key, values]: [string, string[]]) =>
+      values.map((value: string) => `<link rel="${key}" href="${value}" />`).join('\n')
+  )
+
 const basicHtml = `
   <html>
       <head>
-      ${Object.keys(defaultRels).map((key) =>
-        defaultRels[key].map(
-          (value) => `<link rel="${key}" href="${value}" />`
-        )
-      )}
+        ${links.join('\n')}
       </head>
       <body>
           <p>Hello world</p>

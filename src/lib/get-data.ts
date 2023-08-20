@@ -1,12 +1,6 @@
-import axios from 'axios'
-
-interface relParserProvidedHeadersOption {
-  [key: string]: string
-}
-
 interface GetOptionsResponse {
   html: string
-  headers: relParserProvidedHeadersOption
+  headers: Headers
   baseUrl: string
 }
 
@@ -14,19 +8,20 @@ interface GetOptionsResponse {
  * Fetches the given url and gets rel links from the html and headers.
  */
 const getData = async (url: string): Promise<GetOptionsResponse> => {
-  const res = await axios({
-    url,
-    method: 'get',
-    responseType: 'text',
+  const res = await fetch(url, {
+    method: 'GET',
+    mode: 'cors',
     headers: {
-      accept: 'text/html,application/xhtml+xml',
-    },
+      accept: 'text/html,application/xhtml+xml'
+    }
   })
 
+  const html = await res.text()
+
   return {
-    html: res.data,
+    html,
     headers: res.headers,
-    baseUrl: res?.request?.res?.responseUrl ?? url,
+    baseUrl: res?.url ?? url
   }
 }
 

@@ -1,34 +1,36 @@
+import { parseDocument, DomUtils } from 'htmlparser2'
+import type { relParserResponse } from '../types'
+
 const getRelsFromHtml = (html: string, baseUrl: string): relParserResponse => {
-  const rels = {}
+  const rels: relParserResponse = {}
 
-  const doc = new DOMParser().parseFromString(html, 'text/html')
+  const doc = parseDocument(html)
 
-  const baseEl = doc.querySelector('base[href]')
-  const relEls = doc.querySelectorAll('[rel][href]')
+  const baseEl = DomUtils.findOne((el) => (el.name === 'base' && el?.attribs?.href !== null), doc.children)
+  const relEls = DomUtils.findAll((el) => (el?.attribs?.href !== null && el?.attribs?.rel !== null), doc.children)
 
   // Take a base element into account
-  if ((baseEl != null) && doc.baseURI) {
-    const value = doc.baseURI
+  if ((baseEl != null)) {
+    const value = baseEl.attribs.href
     const urlObj = new URL(value, baseUrl)
     baseUrl = urlObj.toString()
   }
 
-  if (relEls.length) {
+  if (relEls.length > 0) {
     for (const relEl of relEls) {
-      const names = relEl
-        ?.getAttribute('rel')
+      const names = relEl.attribs.rel
         ?.toLowerCase()
         ?.split(/(\s+)/)
         ?.filter((key) => key.trim()) ?? []
-      const value = relEl.getAttribute('href')
+      const value = relEl.attribs.href
 
-      if ((names.length > 0) && value !== null) {
+      if ((names.length > 0) && typeof value !== 'undefined' && value !== null) {
         for (const name of names) {
-          if (!rels[name]) {
+          if (typeof rels[name] === 'undefined') {
             rels[name] = []
           }
           const url = new URL(value, baseUrl).toString()
-          if (rels[name].indexOf(url) === -1) {
+          if (!rels[name].includes(url)) {
             rels[name].push(url)
           }
         }
