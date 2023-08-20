@@ -1,0 +1,7 @@
+{
+  "editor.defaultFormatter": "standard.vscode-standard",
+  "standard.engine": "ts-standard",
+  "[typescript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  }
+}
