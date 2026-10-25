@@ -26,7 +26,7 @@
     "test": "npm run clean:test && npm run test:lint && npm run test:build && npm run test:unit",
     "test:build": "tsup --env.TEST=yes",
     "test:lint": "biome check src",
-    "test:unit": "node --test tmp/tests/tests"
+    "test:unit": "node --test \"tmp/tests/tests/**/*.test.js\""
   },
   "license": "MIT",
   "files": [
