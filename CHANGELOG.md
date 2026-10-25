@@ -1,5 +1,13 @@
 # Changelog
 
+## [3.0.1](https://github.com/grantcodes/rel-parser/compare/rel-parser-v3.0.0...rel-parser-v3.0.1) (2026-10-25)
+
+
+### Bug Fixes
+
+* **publish:** build dist in prepack so the tarball includes it ([c7040b1](https://github.com/grantcodes/rel-parser/commit/c7040b1306d33a05cfb194e00a36d73edc0645c1))
+* **publish:** build dist in prepack so the tarball includes it ([cade0a8](https://github.com/grantcodes/rel-parser/commit/cade0a81456ed59046d0208db3b3ec3f558681ce))
+
 ## [3.0.0](https://github.com/grantcodes/rel-parser/compare/rel-parser-v2.0.1...rel-parser-v3.0.0) (2026-10-25)
 
 
