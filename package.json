@@ -21,7 +21,7 @@
     "test": "npm run clean:test && npm run test:lint && npm run test:build && npm run test:unit",
     "test:build": "tsup --env.TEST=yes",
     "test:lint": "biome check src",
-    "test:unit": "ava"
+    "test:unit": "node --test tmp/tests/tests"
   },
   "license": "MIT",
   "files": [
@@ -51,15 +51,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.6.3",
-    "@grantcodes/commit": "^2.0.0",
-    "ava": "^8.1.2",
     "tsup": "^9.0.0",
     "typescript": "^5.9.3"
-  },
-  "ava": {
-    "files": [
-      "tmp/tests/tests/**/*",
-      "!tmp/tests/tests/data"
-    ]
   }
 }

@@ -1,11 +1,11 @@
 import { defineConfig } from 'tsup'
 
-export default defineConfig(options => {
+export default defineConfig((options) => {
   if (options.env?.TEST === 'yes') {
     return {
       outDir: 'tmp/tests',
       entry: ['src'],
-      external: ['ava'],
+      external: ['node:test', 'node:assert/strict'],
       format: ['esm'],
       removeNodeProtocol: false
     }
