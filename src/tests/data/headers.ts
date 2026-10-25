@@ -1,4 +1,4 @@
-import { relParserResponse } from '../../types'
+import type { relParserResponse } from '../../types'
 
 const headersData = [
   {
@@ -33,7 +33,4 @@ for (const header of headersData) {
   headersObject[header.rel].push(header.url)
 }
 
-export {
-  headersString,
-  headersObject
-}
+export { headersObject, headersString }

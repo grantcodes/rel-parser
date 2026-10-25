@@ -5,41 +5,46 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write
+  pull-requests: write
+  id-token: write
+
+concurrency:
+  group: ${{ github.workflow }}
+  cancel-in-progress: false
+
 jobs:
   release-please:
     runs-on: ubuntu-latest
     steps:
-      - uses: google-github-actions/release-please-action@v3
+      - uses: googleapis/release-please-action@v5
         name: Create release PR
+        id: release
         with:
-          release-type: node
-          package-name: 'rel-parser'
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v7
         name: Checkout code
         if: ${{ steps.release.outputs.release_created }}
 
-      - uses: actions/setup-node@v3
+      - uses: actions/setup-node@v7
         name: Setup node
         with:
-          node-version: 18
+          node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
+          cache: npm
         if: ${{ steps.release.outputs.release_created }}
 
       - run: npm ci
         name: Install dependencies
         if: ${{ steps.release.outputs.release_created }}
 
-      - run: npm run build
-        name: Build
-        if: ${{ steps.release.outputs.release_created }}
-
       - run: npm test
-        name: Run tests
+        name: Lint, build and test
         if: ${{ steps.release.outputs.release_created }}
 
-      - run: npm publish
+      - run: npm publish --provenance --access public
         name: Publish to NPM
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         if: ${{ steps.release.outputs.release_created }}

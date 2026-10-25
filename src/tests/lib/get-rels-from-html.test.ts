@@ -1,18 +1,19 @@
-import test from 'ava'
+import assert from 'node:assert/strict'
+import test from 'node:test'
 import { getRelsFromHtml } from '../../lib/get-rels-from-html'
 import { absoluteBaseElRels, absoluteDefaultRels, baseElHtml, basicHtml, brokenHtml } from '../data'
 
-test('basic html', async (t) => {
+test('basic html', async () => {
   const res = await getRelsFromHtml(basicHtml, 'https://example.com')
-  t.deepEqual(res, absoluteDefaultRels)
+  assert.deepEqual(res, absoluteDefaultRels)
 })
 
-test('html with base element', async (t) => {
+test('html with base element', async () => {
   const res = await getRelsFromHtml(baseElHtml, 'https://example.com')
-  t.deepEqual(res, absoluteBaseElRels)
+  assert.deepEqual(res, absoluteBaseElRels)
 })
 
-test('works with broken html', async (t) => {
+test('works with broken html', async () => {
   const res = await getRelsFromHtml(brokenHtml, 'https://example.com')
-  t.deepEqual(res, absoluteDefaultRels)
+  assert.deepEqual(res, absoluteDefaultRels)
 })
