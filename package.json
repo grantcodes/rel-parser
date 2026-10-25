@@ -20,6 +20,7 @@
   },
   "scripts": {
     "build": "tsup",
+    "prepack": "npm run build",
     "watch": "tsup --watch",
     "fix": "biome check --write src",
     "clean:test": "rm -rf tmp/tests",
