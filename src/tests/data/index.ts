@@ -4,7 +4,7 @@ import { baseElHtml } from './base-el-html'
 import { basicHtml } from './basic-html'
 import { brokenHtml } from './broken-html'
 import { defaultRels } from './default-rels'
-import { headersString, headersObject } from './headers'
+import { headersObject, headersString } from './headers'
 
 export {
   absoluteBaseElRels,
@@ -13,6 +13,6 @@ export {
   basicHtml,
   brokenHtml,
   defaultRels,
-  headersString,
-  headersObject
+  headersObject,
+  headersString
 }

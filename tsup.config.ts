@@ -6,7 +6,8 @@ export default defineConfig(options => {
       outDir: 'tmp/tests',
       entry: ['src'],
       external: ['ava'],
-      format: ['esm']
+      format: ['esm'],
+      removeNodeProtocol: false
     }
   } else {
     return {

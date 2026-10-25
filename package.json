@@ -16,18 +16,22 @@
   "scripts": {
     "build": "tsup",
     "watch": "tsup --watch",
-    "fix": "run-s fix:lint",
-    "fix:lint": "ts-standard --fix src",
+    "fix": "biome check --write src",
     "clean:test": "rm -rf tmp/tests",
-    "test": "run-s clean:test test:lint test:build test:unit",
+    "test": "npm run clean:test && npm run test:lint && npm run test:build && npm run test:unit",
     "test:build": "tsup --env.TEST=yes",
-    "test:lint": "ts-standard src",
+    "test:lint": "biome check src",
     "test:unit": "ava"
   },
   "license": "MIT",
+  "files": [
+    "dist/**/*",
+    "CHANGELOG.md",
+    "README.md"
+  ],
   "homepage": "https://github.com/grantcodes/rel-parser#readme",
   "engines": {
-    "node": ">=18"
+    "node": ">=22.20.0"
   },
   "bugs": {
     "url": "https://github.com/grantcodes/rel-parser",
@@ -43,16 +47,14 @@
     "email": "mail@grant.codes"
   },
   "dependencies": {
-    "htmlparser2": "^9.0.0"
+    "htmlparser2": "^12.0.0"
   },
   "devDependencies": {
-    "@ava/typescript": "^4.1.0",
-    "@grantcodes/commit": "^1.0.7",
-    "ava": "^5.3.1",
-    "npm-run-all": "^4.1.5",
-    "ts-standard": "^12.0.2",
-    "tsup": "^7.2.0",
-    "typescript": "^5.1.6"
+    "@biomejs/biome": "^2.6.3",
+    "@grantcodes/commit": "^2.0.0",
+    "ava": "^8.1.2",
+    "tsup": "^9.0.0",
+    "typescript": "^5.9.3"
   },
   "ava": {
     "files": [

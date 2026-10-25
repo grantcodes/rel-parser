@@ -1,7 +1,15 @@
-import test from 'ava'
 import { mock } from 'node:test'
+import test from 'ava'
 import { relParser } from '../../lib/rel-parser'
-import { absoluteBaseElRels, absoluteDefaultRels, baseElHtml, basicHtml, brokenHtml, headersObject, headersString } from '../data'
+import {
+  absoluteBaseElRels,
+  absoluteDefaultRels,
+  baseElHtml,
+  basicHtml,
+  brokenHtml,
+  headersObject,
+  headersString
+} from '../data'
 
 test('requires input', async (t) => {
   await t.throwsAsync(async () => await relParser(''), {

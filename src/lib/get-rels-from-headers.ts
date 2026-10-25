@@ -36,4 +36,4 @@ const getRelsFromHeaders = (headers: relParserProvidedHeadersStrings, baseUrl: s
   return {}
 }
 
-export { parseLinkHeaderString, getRelsFromHeaders }
+export { getRelsFromHeaders, parseLinkHeaderString }

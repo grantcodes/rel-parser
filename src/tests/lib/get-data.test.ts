@@ -1,5 +1,5 @@
-import test from 'ava'
 import { mock } from 'node:test'
+import test from 'ava'
 import { getData } from '../../lib/get-data'
 import { basicHtml } from '../data'
 

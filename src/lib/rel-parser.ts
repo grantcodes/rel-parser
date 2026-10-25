@@ -1,7 +1,7 @@
-import { getData } from './get-data'
-import { getRelsFromHtml } from './get-rels-from-html'
-import { getRelsFromHeaders } from './get-rels-from-headers'
 import type { relParserProvidedHeadersStrings, relParserResponse } from '../types'
+import { getData } from './get-data'
+import { getRelsFromHeaders } from './get-rels-from-headers'
+import { getRelsFromHtml } from './get-rels-from-html'
 
 /**
  * Fetches the given url and gets rel links from the html and headers.
