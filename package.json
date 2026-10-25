@@ -8,9 +8,14 @@
   "types": "dist/main.d.ts",
   "exports": {
     ".": {
-      "require": "./dist/main.cjs",
-      "import": "./dist/main.js",
-      "types": "./dist/main.d.ts"
+      "import": {
+        "types": "./dist/main.d.ts",
+        "default": "./dist/main.js"
+      },
+      "require": {
+        "types": "./dist/main.d.cts",
+        "default": "./dist/main.cjs"
+      }
     }
   },
   "scripts": {
