@@ -24,7 +24,7 @@
     "watch": "tsup --watch",
     "fix": "biome check --write src",
     "clean:test": "rm -rf tmp/tests",
-    "test": "npm run clean:test && npm run test:lint && npm run test:build && npm run test:unit",
+    "test": "pnpm run clean:test && pnpm run test:lint && pnpm run test:build && pnpm run test:unit",
     "test:build": "tsup --env.TEST=yes",
     "test:lint": "biome check src",
     "test:unit": "node --test \"tmp/tests/tests/**/*.test.js\""
@@ -59,5 +59,6 @@
     "@biomejs/biome": "^2.6.3",
     "tsup": "^9.0.0",
     "typescript": "^5.9.3"
-  }
+  },
+  "packageManager": "pnpm@11.15.1"
 }
