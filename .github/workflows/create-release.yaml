@@ -29,22 +29,26 @@ jobs:
         name: Checkout code
         if: ${{ steps.release.outputs.release_created }}
 
+      - uses: pnpm/action-setup@v4
+        name: Setup pnpm
+        if: ${{ steps.release.outputs.release_created }}
+
       - uses: actions/setup-node@v7
         name: Setup node
         with:
           node-version-file: '.nvmrc'
           registry-url: 'https://registry.npmjs.org'
-          cache: npm
+          cache: pnpm
         if: ${{ steps.release.outputs.release_created }}
 
-      - run: npm ci
+      - run: pnpm install --frozen-lockfile
         name: Install dependencies
         if: ${{ steps.release.outputs.release_created }}
 
-      - run: npm test
+      - run: pnpm test
         name: Lint, build and test
         if: ${{ steps.release.outputs.release_created }}
 
-      - run: npm publish --provenance --access public
+      - run: pnpm publish --provenance --access public
         name: Publish to NPM
         if: ${{ steps.release.outputs.release_created }}
